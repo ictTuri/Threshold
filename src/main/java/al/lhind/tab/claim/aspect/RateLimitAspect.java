@@ -41,10 +41,15 @@ public class RateLimitAspect {
         Method method = signature.getMethod();
 
         String key = ip + ":" + method.getName();
+
+        int capacity = rateDataUtil.getCapacity();
+        int tokens = rateDataUtil.getTokens();
+        int minutes = rateDataUtil.getMinutes();
+
         Bucket bucket = buckets.computeIfAbsent(key, k -> {
             Bandwidth limit = Bandwidth.classic(
-                    rateDataUtil.getCapacity(),
-                    Refill.greedy(rateDataUtil.getTokens(), Duration.ofMinutes(rateDataUtil.getMinutes()))
+                    capacity,
+                    Refill.greedy(tokens, Duration.ofMinutes(minutes))
             );
             return Bucket.builder().addLimit(limit).build();
         });

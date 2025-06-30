@@ -42,9 +42,13 @@ public class ThresholdFilter extends OncePerRequestFilter {
     }
 
     private Bucket resolveBucket(String key) {
+
+        int capacity = rateDataUtil.getCapacity();
+        int tokens = rateDataUtil.getTokens();
+        int minutes = rateDataUtil.getMinutes();
+
         return buckets.computeIfAbsent(key, k -> {
-            Bandwidth limit = Bandwidth.classic(rateDataUtil.getCapacity(),
-                    Refill.greedy(rateDataUtil.getTokens(), Duration.ofMinutes(rateDataUtil.getMinutes())));
+            Bandwidth limit = Bandwidth.classic(capacity, Refill.greedy(tokens, Duration.ofMinutes(minutes)));
             return Bucket.builder().addLimit(limit).build();
         });
     }
