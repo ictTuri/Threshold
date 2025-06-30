@@ -46,6 +46,24 @@
 			<version>1.18.32</version>
 			<scope>provided</scope>
 		</dependency>
+		<!-- Could Starter Allows us to use @RefreshScope -->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter</artifactId>
+			<version>4.1.2</version>
+		</dependency>
+		<!-- Allows us to refresh configuration properties -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-actuator</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<!-- Throttling -->
+		<dependency>
+			<groupId>com.github.vladimir-bukhtoyarov</groupId>
+			<artifactId>bucket4j-core</artifactId>
+			<version>8.0.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

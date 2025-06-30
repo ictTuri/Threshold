@@ -22,3 +22,16 @@ server:
       max-connections: 1000
       accept-count: 100
       max-http-post-size: 100MB
+
+# Needs a Spring Cloud Config Server to dynamically load properties
+rate:
+  limit:
+    capacity: 5
+    tokens: 5
+    minutes: 1
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: refresh,health,info

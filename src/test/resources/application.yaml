@@ -1,0 +1,5 @@
+rate:
+  limit:
+    capacity: 5
+    tokens: 5
+    minutes: 1

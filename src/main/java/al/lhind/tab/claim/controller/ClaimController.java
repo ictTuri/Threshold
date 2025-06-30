@@ -1,8 +1,11 @@
 package al.lhind.tab.claim.controller;
 
+import al.lhind.tab.claim.aspect.annotations.RateLimit;
 import al.lhind.tab.claim.exception.CustomException;
 import al.lhind.tab.claim.model.ui.ClaimDto;
 import al.lhind.tab.claim.service.ClaimService;
+import al.lhind.tab.claim.util.RateDataUtil;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +21,7 @@ import java.net.URI;
 @RestController
 @RequestMapping("/claims")
 public class ClaimController {
+
     private final ClaimService claimService;
 
     public ClaimController(ClaimService claimService) {
@@ -25,6 +29,7 @@ public class ClaimController {
     }
 
     @GetMapping("/{id}")
+    @RateLimit
     public ClaimDto getClaim(@PathVariable Long id) throws CustomException {
         return claimService.getClaim(id);
     }
